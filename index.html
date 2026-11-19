@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Berry Rotunda</title>
+<style>
+@font-face{font-family:"Berry Rotunda";src:url("berry_rotunda.ttf") format("truetype");font-display:swap}
+:root{--bg:#f7e9f0;--fg:#3a0f2a;--mut:#7d4a65;--line:#d9b3c7;--card:#fff6fa;--acc:#8c1d5a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a0a1e;--fg:#f8e6ef;--mut:#c79ab3;--line:#5a2342;--card:#38112a;--acc:#f19cc4}}
+:root[data-theme="dark"]{--bg:#2a0a1e;--fg:#f8e6ef;--mut:#c79ab3;--line:#5a2342;--card:#38112a;--acc:#f19cc4}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 20px 48px}
+h1{font-family:"Berry Rotunda",Georgia,serif;font-weight:400;font-size:clamp(52px,17vw,112px);line-height:.95;margin:.1em 0 .15em}
+.sub{color:var(--mut);margin:0 0 32px;max-width:46ch}
+h2{font-size:15px;font-weight:600;margin:36px 0 10px}
+textarea{width:100%;min-height:120px;resize:vertical;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font-family:"Berry Rotunda",Georgia,serif;font-size:var(--s,36px);line-height:1.25}
+textarea:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+label{display:flex;align-items:center;gap:12px;margin-top:12px;color:var(--mut);font-size:14px}
+input[type=range]{flex:1;accent-color:var(--acc)}
+.row{font-family:"Berry Rotunda",Georgia,serif;overflow-wrap:anywhere}
+.alpha{font-size:30px;line-height:1.25;border-top:1px solid var(--line);padding-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px}
+.grid button{aspect-ratio:1;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font:30px "Berry Rotunda",Georgia,serif;cursor:pointer}
+.grid button:active{background:var(--acc);color:var(--bg)}
+.sizes .row{border-top:1px solid var(--line);padding:8px 0}
+.ft{margin-top:40px;color:var(--mut);font-size:13px}
+</style></head><body><main>
+<h1>Berry Rotunda</h1>
+<p class="sub">Una tipografía redonda de aire gótico. Escribe, cambia el tamaño y toca una letra para añadirla.</p>
+<h2>Pruébala</h2>
+<textarea id="t" aria-label="Texto de prueba">El veloz murciélago hindú comía feliz cardillo y kiwi.</textarea>
+<label>Tamaño <input id="r" type="range" min="14" max="120" value="36" aria-label="Tamaño de letra"><span id="v">36 px</span></label>
+<h2>Letras y signos</h2>
+<div class="grid" id="g"></div>
+<h2>Alfabeto</h2>
+<div class="row alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 ¡!¿? &amp;@#$%</div>
+<h2>Tamaños</h2>
+<div class="sizes">
+<div class="row" style="font-size:44px">La cigüeña tocaba el saxofón</div>
+<div class="row" style="font-size:28px">detrás del palenque de paja.</div>
+<div class="row" style="font-size:18px">Quizás mañana vuelva a escribir con esta tipografía.</div>
+<div class="row" style="font-size:13px">Pack my box with five dozen liquor jugs.</div>
+</div>
+<p class="ft">Berry Rotunda 1.0, de Typo-Graf (2016). Dominio público.</p>
+</main>
+<script>
+var t=document.getElementById("t"),r=document.getElementById("r"),v=document.getElementById("v"),g=document.getElementById("g");
+r.oninput=function(){t.style.setProperty("--s",r.value+"px");v.textContent=r.value+" px"};
+t.style.setProperty("--s","36px");
+Array.from("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¿ÀÁÂÄÇÈÉÊËÍÏÑÓÔÖÙÚÜàáâäçèéêëíïñóôöùúü").forEach(function(c){var b=document.createElement("button");b.type="button";b.textContent=c;b.setAttribute("aria-label","Añadir "+c);
+b.onclick=function(){var p=t.selectionStart==null?t.value.length:t.selectionStart;t.value=t.value.slice(0,p)+c+t.value.slice(t.selectionEnd);t.focus();t.selectionStart=t.selectionEnd=p+1};g.appendChild(b)});
+</script></body></html>
